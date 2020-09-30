@@ -16,6 +16,9 @@ dependencies:
   english_words: ^3.1.5
   webfeed: ^0.6.0
   http: ^0.12.2
+  flutter_bloc: ^6.0.5
+  equatable: ^1.2.3
+  dartz: ^0.9.1
 
 dev_dependencies:
   flutter_test:
