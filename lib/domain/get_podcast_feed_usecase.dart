@@ -6,10 +6,10 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class GetPodcastFeed implements UseCase<List<Episode>, Params> {
+class GetPodcastFeedUseCase implements UseCase<List<Episode>, Params> {
   final PodcastRepository repository;
 
-  GetPodcastFeed(this.repository);
+  GetPodcastFeedUseCase(this.repository);
 
   @override
   Future<Either<Failure, List<Episode>>> execute(Params params) async {
