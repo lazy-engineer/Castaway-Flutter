@@ -1,3 +1,4 @@
+import 'package:castaway/core/exceptions.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:webfeed/webfeed.dart';
@@ -20,7 +21,7 @@ class PodcastRemoteDataSourceImpl implements PodcastRemoteDataSource {
     if (response.statusCode == 200) {
       return RssFeed.parse(response.body);
     } else {
-      throw Exception();
+      throw ServerException();
     }
   }
 }
