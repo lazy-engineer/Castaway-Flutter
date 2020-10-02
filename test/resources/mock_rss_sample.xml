@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <category>Newspapers</category>
+    <cloud domain="radio.xmlstoragesystem.com" path="/RPC2" port="80" protocol="xml-rpc" registerProcedure="xmlStorageSystem.rssPleaseNotify" />
+    <copyright>Copyright 2002, Spartanburg Herald-Journal</copyright>
+    <description>The latest news from GoUpstate.com, a Spartanburg Herald-Journal Web site.</description>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <generator>MightyInHouse Content System v2.3</generator>
+    <image>
+      <description>FeedForAll - RSS Software</description>
+      <height>39</height>
+      <link>http://www.feedforall.com/blog.htm</link>
+      <title>FeedForAll</title>
+      <url>http://www.feedforall.com/feedforall-icon.gif</url>
+      <width>42</width>
+    </image>
+    <item>
+      <author>lawyer@boyer.net (Lawyer Boyer)</author>
+      <category>Grateful Dead</category>
+      <category domain="http://www.fool.com/cusips">MSFT</category>
+      <comments>http://ekzemplo.com/entry/4403/comments</comments>
+      <description>New RSS tutorial on W3Schools</description>
+      <enclosure length="12216320" type="audio/mpeg" url="http://www.scripting.com/mp3s/weatherReportSuite.mp3" />
+      <guid isPermaLink="true">http://inessential.com/2002/09/01.php#a2</guid>
+      <link>https://www.w3schools.com/xml/xml_rss.asp</link>
+      <pubDate>Sun, 19 May 2002 15:21:36 GMT</pubDate>
+      <source url="http://static.userland.com/tomalak/links2.xml">Tomalak's Realm</source>
+      <title>RSS Tutorial</title>
+    </item>
+    <item>
+      <description>In this image, NASA&#039;s Mars 2020 Perseverance rover waits to be lifted onto its Atlas V
+        launch vehicle at the Cape Canaveral Air Force Station in Florida on July 7, 2020.
+      </description>
+      <enclosure length="498003" type="image/jpeg" url="http://www.nasa.gov/sites/default/files/thumbnails/image/pia23984-16.jpg" />
+      <guid isPermaLink="false">
+        http://www.nasa.gov/image-feature/perseverance-rover-mated-to-its-atlas-v-rocket
+      </guid>
+      <link>http://www.nasa.gov/image-feature/perseverance-rover-mated-to-its-atlas-v-rocket</link>
+      <pubDate>Tue, 14 Jul 2020 10:19 EDT</pubDate>
+      <source url="http://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss">NASA Image of the Day</source>
+      <title>Perseverance Rover Mated to Its Atlas V Rocket</title>
+    </item>
+    <item>
+      <description>Perseverance Integrated with Launch Vehicle and more ...</description>
+      <enclosure length="4888337" type="audio/mpeg" url="http://www.nasa.gov/sites/default/files/atoms/audio/twan_7_10_2020.mp3" />
+      <guid isPermaLink="false">http://www.nasa.gov/mediacast/this-week-nasa-july-10-2020</guid>
+      <link>http://www.nasa.gov/mediacast/this-week-nasa-july-10-2020</link>
+      <pubDate>Fri, 10 Jul 2020 15:27 EDT</pubDate>
+      <source url="http://www.nasa.gov/rss/dyn/TWAN_podcast.rss">NASACast: This Week @NASA Audio</source>
+      <title>This Week @NASA, July 10, 2020</title>
+    </item>
+    <item>
+      <description>Perseverance Integrated with Launch Vehicle and more ...</description>
+      <enclosure length="216692678" type="video/mp4" url="http://www.nasa.gov/sites/default/files/atoms/video/twan_7_10_2020_final.mp4" />
+      <guid isPermaLink="false">http://www.nasa.gov/mediacast/this-week-nasa-july-10-2020</guid>
+      <link>http://www.nasa.gov/mediacast/this-week-nasa-july-10-2020</link>
+      <pubDate>Fri, 10 Jul 2020 15:27 EDT</pubDate>
+      <source url="http://www.nasa.gov/rss/dyn/TWAN_vodcast.rss">NASACast: This Week @ NASA Video</source>
+      <title>This Week @NASA, July 10, 2020</title>
+    </item>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Sep 2002 09:42:31 GMT</lastBuildDate>
+    <link>http://www.goupstate.com/</link>
+    <managingEditor>geo@herald.com (George Matesky)</managingEditor>
+    <pubDate>Sat, 07 Sep 2002 00:00:01 GMT</pubDate>
+    <rating>(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "webmaster@example.com" on
+      "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))
+    </rating>
+    <skipDays>
+      <day>Saturday</day>
+      <day>Sunday</day>
+    </skipDays>
+    <skipHours>
+      <hour>0</hour>
+      <hour>1</hour>
+      <hour>2</hour>
+      <hour>22</hour>
+      <hour>23</hour>
+    </skipHours>
+    <textInput>
+      <description>Your aggregator supports the textInput element. What software are you using?</description>
+      <link>http://www.cadenhead.org/textinput.php</link>
+      <name>query</name>
+      <title>TextInput Inquiry</title>
+    </textInput>
+    <title>GoUpstate.com News Headlines</title>
+    <ttl>60</ttl>
+    <webMaster>betty@herald.com (Betty Guernsey)</webMaster>
+  </channel>
+</rss>
