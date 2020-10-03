@@ -29,7 +29,7 @@ void main() {
         .thenAnswer((_) async => http.Response('Something went wrong', 404));
   }
 
-  group('getPodcast', () {
+  group('loadPodcast', () {
     final sampleRSSFeed = RssFeed.parse(read('mock_rss_sample.xml'));
 
     test(
@@ -39,7 +39,7 @@ void main() {
         final requestUrl = "podcast.url";
         setUpMockHttpClientSuccess200();
         // when
-        dataSource.getPodcast(requestUrl);
+        dataSource.loadPodcast(requestUrl);
         // then
         verify(mockHttpClient.get(requestUrl));
       },
@@ -51,7 +51,7 @@ void main() {
         // given
         setUpMockHttpClientSuccess200();
         // when
-        final result = await dataSource.getPodcast("podcast.url");
+        final result = await dataSource.loadPodcast("podcast.url");
         // then
         expect(result.title, equals(sampleRSSFeed.title));
       },
@@ -63,7 +63,7 @@ void main() {
         // given
         setUpMockHttpClientFailure404();
         // when
-        final call = dataSource.getPodcast;
+        final call = dataSource.loadPodcast;
         // then
         expect(
             () => call("podcast.url"), throwsA(TypeMatcher<ServerException>()));

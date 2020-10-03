@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:webfeed/webfeed.dart';
 
 abstract class PodcastRemoteDataSource {
-  Future<RssFeed> getPodcast(String url);
+  Future<RssFeed> loadPodcast(String url);
 }
 
 class PodcastRemoteDataSourceImpl implements PodcastRemoteDataSource {
@@ -13,7 +13,7 @@ class PodcastRemoteDataSourceImpl implements PodcastRemoteDataSource {
   PodcastRemoteDataSourceImpl({@required this.client});
 
   @override
-  Future<RssFeed> getPodcast(String url) => _getRSSFeedFromUrl(url);
+  Future<RssFeed> loadPodcast(String url) => _getRSSFeedFromUrl(url);
 
   Future<RssFeed> _getRSSFeedFromUrl(String url) async {
     var response = await client.get(url);

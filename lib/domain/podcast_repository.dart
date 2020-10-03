@@ -21,7 +21,7 @@ class PodcastRepositoryImpl implements PodcastRepository {
   @override
   Future<Either<Failure, List<Episode>>> getPodcastFeed(String url) async {
     try {
-      final remote = await remoteDataSource.getPodcast(url);
+      final remote = await remoteDataSource.loadPodcast(url);
 
       final episodes = remote.items
           .map((e) => Episode(title: e.title, description: e.description))
