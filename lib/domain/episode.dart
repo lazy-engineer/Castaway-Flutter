@@ -12,4 +12,7 @@ class Episode extends Equatable {
 
   @override
   List<Object> get props => [title, description];
+
+  @override
+  bool get stringify => true;
 }
