@@ -1,14 +1,15 @@
 import 'dart:ui';
 
 import 'package:castaway/domain/entity/episode.dart';
+import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:flutter/material.dart';
 
 class PodcastFeedScreen extends StatelessWidget {
-  final List<Episode> episodes;
+  final PodcastFeed podcastFeed;
 
   const PodcastFeedScreen({
     Key key,
-    @required this.episodes,
+    @required this.podcastFeed,
   }) : super(key: key);
 
   @override
@@ -26,8 +27,8 @@ class PodcastFeedScreen extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (_, index) => _buildRow(episodes[index]),
-              childCount: episodes.length,
+              (_, index) => _buildRow(podcastFeed.episodes[index]),
+              childCount: podcastFeed.episodes.length,
             ),
           )
         ],

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:castaway/core/failure.dart';
-import 'package:castaway/domain/entity/episode.dart';
+import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/presentation/podcast_event.dart';
 import 'package:castaway/presentation/podcast_state.dart';
@@ -32,11 +32,11 @@ class PodcastBloc extends Bloc<PodcastEvent, PodcastState> {
   }
 
   Stream<PodcastState> _eitherLoadedOrErrorState(
-    Either<Failure, List<Episode>> failureOrEpisodes,
+    Either<Failure, PodcastFeed> failureOrFeed,
   ) async* {
-    yield failureOrEpisodes.fold(
+    yield failureOrFeed.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),
-      (episodes) => Loaded(episodes: episodes),
+      (feed) => Loaded(podcastFeed: feed),
     );
   }
 

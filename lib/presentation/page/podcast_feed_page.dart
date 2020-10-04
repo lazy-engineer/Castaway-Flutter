@@ -42,7 +42,7 @@ class PodcastFeedPage extends StatelessWidget {
             } else if (state is Loading) {
               return LoadingScreen();
             } else if (state is Loaded) {
-              return PodcastFeedScreen(episodes: state.episodes);
+              return PodcastFeedScreen(podcastFeed: state.podcastFeed);
             } else if (state is Error) {
               return ErrorScreen(message: state.message);
             }

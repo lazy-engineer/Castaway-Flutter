@@ -1,4 +1,4 @@
-import 'package:castaway/domain/entity/episode.dart';
+import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
@@ -13,12 +13,12 @@ class Empty extends PodcastState {}
 class Loading extends PodcastState {}
 
 class Loaded extends PodcastState {
-  final List<Episode> episodes;
+  final PodcastFeed podcastFeed;
 
-  Loaded({@required this.episodes});
+  Loaded({@required this.podcastFeed});
 
   @override
-  List<Object> get props => [episodes];
+  List<Object> get props => [podcastFeed];
 }
 
 class Error extends PodcastState {

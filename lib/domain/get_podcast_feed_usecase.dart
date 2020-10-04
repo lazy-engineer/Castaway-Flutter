@@ -1,18 +1,19 @@
 import 'package:castaway/core/failure.dart';
 import 'package:castaway/core/usecase.dart';
-import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/podcast_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-class GetPodcastFeedUseCase implements UseCase<List<Episode>, Params> {
+import 'entity/podcast_feed.dart';
+
+class GetPodcastFeedUseCase implements UseCase<PodcastFeed, Params> {
   final PodcastRepository repository;
 
   GetPodcastFeedUseCase(this.repository);
 
   @override
-  Future<Either<Failure, List<Episode>>> execute(Params params) async {
+  Future<Either<Failure, PodcastFeed>> execute(Params params) async {
     return await repository.getPodcastFeed(params.url);
   }
 }

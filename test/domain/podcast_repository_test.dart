@@ -3,6 +3,7 @@ import 'package:castaway/core/failure.dart';
 import 'package:castaway/data/podcast_local_data_source.dart';
 import 'package:castaway/data/podcast_remote_data_source.dart';
 import 'package:castaway/domain/entity/episode.dart';
+import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:castaway/domain/podcast_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -52,6 +53,12 @@ void main() {
         .map((e) => Episode(title: e.title, description: e.description))
         .toList();
 
+    final podcastFeed = PodcastFeed(
+      title: "Feed Title",
+      description: "Feed Description",
+      episodes: episodes,
+    );
+
     final requestUrl = "podcast.url";
 
     test(
@@ -65,7 +72,7 @@ void main() {
         // then
         verify(mockRemoteDataSource.loadPodcast(requestUrl));
         expect(result.toString(),
-            equals(Right<Failure, List<Episode>>(episodes).toString()));
+            equals(Right<Failure, PodcastFeed>(podcastFeed).toString()));
       },
     );
 

@@ -1,5 +1,6 @@
 import 'package:castaway/core/failure.dart';
 import 'package:castaway/domain/entity/episode.dart';
+import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/presentation/podcast_bloc.dart';
 import 'package:castaway/presentation/podcast_event.dart';
@@ -25,7 +26,7 @@ void main() {
     });
 
     test(
-      'should emit [Loading, Loaded] when episodes are loaded successfully',
+      'should emit [Loading, Loaded] when podcast feed is loaded successfully',
       () async {
         // given
         final List<Episode> episodes = List(2);
@@ -37,8 +38,14 @@ void main() {
           title: "Episode 2",
           description: "Descriptions of Episode 2",
         );
+        final podcastFeed = PodcastFeed(
+          title: "Podcast Title",
+          description: "Podcast Description",
+          episodes: episodes,
+        );
+
         when(mockGetPodcastFeedUseCase.execute(any))
-            .thenAnswer((_) async => Right(episodes));
+            .thenAnswer((_) async => Right(podcastFeed));
 
         // when
         bloc.add(GetPodcastEpisodesEvent("podcast.url"));
@@ -46,7 +53,7 @@ void main() {
         // then
         final expected = [
           Loading(),
-          Loaded(episodes: episodes),
+          Loaded(podcastFeed: podcastFeed),
         ];
         expectLater(bloc, emitsInOrder(expected));
       },

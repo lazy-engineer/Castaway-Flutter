@@ -5,8 +5,10 @@ import 'package:castaway/domain/entity/episode.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
+import 'entity/podcast_feed.dart';
+
 abstract class PodcastRepository {
-  Future<Either<Failure, List<Episode>>> getPodcastFeed(String url);
+  Future<Either<Failure, PodcastFeed>> getPodcastFeed(String url);
 }
 
 class PodcastRepositoryImpl implements PodcastRepository {
@@ -19,7 +21,7 @@ class PodcastRepositoryImpl implements PodcastRepository {
   });
 
   @override
-  Future<Either<Failure, List<Episode>>> getPodcastFeed(String url) async {
+  Future<Either<Failure, PodcastFeed>> getPodcastFeed(String url) async {
     try {
       final remote = await remoteDataSource.loadPodcast(url);
 
@@ -27,7 +29,13 @@ class PodcastRepositoryImpl implements PodcastRepository {
           .map((e) => Episode(title: e.title, description: e.description))
           .toList();
 
-      return Right(episodes);
+      final podcastFeed = PodcastFeed(
+        title: remote.title,
+        description: remote.description,
+        episodes: episodes,
+      );
+
+      return Right(podcastFeed);
     } on Exception {
       return Left(ServerFailure());
     }

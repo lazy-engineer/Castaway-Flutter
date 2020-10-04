@@ -1,4 +1,5 @@
 import 'package:castaway/domain/entity/episode.dart';
+import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/domain/podcast_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -26,18 +27,23 @@ void main() {
     description: "Descriptions of Episode 2",
   );
 
+  final podcastFeed = PodcastFeed(
+    title: "Podcast Title",
+    description: "Podcast Description",
+    episodes: episodes,
+  );
   final podcastUrl = "podcast.url";
 
   test(
-    'should get list of episodes for the feed url from the repository',
+    'should get podcast feed for the feed url from the repository',
     () async {
       // given
       when(mockRepository.getPodcastFeed(any))
-          .thenAnswer((_) async => Right(episodes));
+          .thenAnswer((_) async => Right(podcastFeed));
       // when
       final result = await usecase.execute(Params(url: podcastUrl));
       // then
-      expect(result, Right(episodes));
+      expect(result, Right(podcastFeed));
       verify(mockRepository.getPodcastFeed(podcastUrl));
       verifyNoMoreInteractions(mockRepository);
     },
