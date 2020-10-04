@@ -1,5 +1,5 @@
-import 'package:castaway/core/failures.dart';
-import 'package:castaway/domain/episode.dart';
+import 'package:castaway/core/failure.dart';
+import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/presentation/podcast_bloc.dart';
 import 'package:castaway/presentation/podcast_event.dart';

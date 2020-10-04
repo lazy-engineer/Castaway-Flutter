@@ -1,6 +1,6 @@
-import 'package:castaway/core/failures.dart';
+import 'package:castaway/core/failure.dart';
 import 'package:castaway/core/usecase.dart';
-import 'package:castaway/domain/episode.dart';
+import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/podcast_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';

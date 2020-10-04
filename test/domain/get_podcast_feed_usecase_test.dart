@@ -1,4 +1,4 @@
-import 'package:castaway/domain/episode.dart';
+import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/domain/podcast_repository.dart';
 import 'package:dartz/dartz.dart';

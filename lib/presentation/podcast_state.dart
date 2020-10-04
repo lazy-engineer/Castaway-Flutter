@@ -1,4 +1,4 @@
-import 'package:castaway/domain/episode.dart';
+import 'package:castaway/domain/entity/episode.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

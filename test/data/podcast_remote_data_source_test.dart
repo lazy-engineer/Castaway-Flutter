@@ -1,4 +1,4 @@
-import 'package:castaway/core/exceptions.dart';
+import 'package:castaway/core/exception.dart';
 import 'package:castaway/data/podcast_remote_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;

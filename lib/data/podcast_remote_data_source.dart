@@ -1,4 +1,4 @@
-import 'package:castaway/core/exceptions.dart';
+import 'package:castaway/core/exception.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:webfeed/webfeed.dart';

@@ -1,8 +1,8 @@
-import 'package:castaway/core/exceptions.dart';
-import 'package:castaway/core/failures.dart';
+import 'package:castaway/core/exception.dart';
+import 'package:castaway/core/failure.dart';
 import 'package:castaway/data/podcast_local_data_source.dart';
 import 'package:castaway/data/podcast_remote_data_source.dart';
-import 'package:castaway/domain/episode.dart';
+import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/podcast_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
