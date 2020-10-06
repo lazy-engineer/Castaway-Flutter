@@ -4,6 +4,7 @@ import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:just_audio/just_audio.dart';
 
 class PodcastFeedScreen extends StatelessWidget {
   final PodcastFeed podcastFeed;
@@ -19,6 +20,8 @@ class PodcastFeedScreen extends StatelessWidget {
   }
 
   Widget _buildSliverEpisodes(BuildContext context) {
+    final player = AudioPlayer();
+
     return Container(
       color: Theme.of(context).highlightColor,
       child: SafeArea(
@@ -35,8 +38,11 @@ class PodcastFeedScreen extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (_, index) =>
-                    _buildEpisodeRow(context, podcastFeed.episodes[index]),
+                (_, index) => _buildEpisodeRow(
+                  context,
+                  podcastFeed.episodes[index],
+                  player,
+                ),
                 childCount: podcastFeed.episodes.length,
               ),
             )
@@ -46,7 +52,8 @@ class PodcastFeedScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEpisodeRow(BuildContext context, Episode episode) {
+  Widget _buildEpisodeRow(
+      BuildContext context, Episode episode, AudioPlayer player) {
     return Container(
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -94,11 +101,25 @@ class PodcastFeedScreen extends StatelessWidget {
         subtitle: Text("Subtitle",
             style: TextStyle(color: Theme.of(context).accentColor)),
         dense: false,
-        trailing: Icon(Icons.play_circle_outline_rounded),
+        trailing: IconButton(
+          icon: Icon(Icons.play_circle_outline_rounded),
+          onPressed: () {
+            try {
+              _play(player, episode.audioUrl);
+            } catch (e) {
+              print("Error: $e");
+            }
+          },
+        ),
       ),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.black26))),
     );
+  }
+
+  Future<void> _play(AudioPlayer player, String url) async {
+    await player.setUrl(url);
+    player.playing ? await player.pause() : await player.play();
   }
 }
 

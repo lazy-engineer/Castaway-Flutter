@@ -26,7 +26,10 @@ class PodcastRepositoryImpl implements PodcastRepository {
       final remote = await remoteDataSource.loadPodcast(url);
 
       final episodes = remote.items
-          .map((e) => Episode(title: e.title, description: e.description))
+          .map((e) => Episode(
+              title: e.title,
+              description: e.description,
+              audioUrl: e.enclosure.url))
           .toList();
 
       final podcastFeed = PodcastFeed(
