@@ -6,3 +6,5 @@ abstract class Failure extends Equatable {
 }
 
 class ServerFailure extends Failure {}
+
+class AudioPlayerFailure extends Failure {}

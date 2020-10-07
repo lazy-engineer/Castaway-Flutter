@@ -1,7 +1,6 @@
-import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/entity/podcast_feed.dart';
-import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/domain/podcast_repository.dart';
+import 'package:castaway/domain/usecase/get_podcast_feed_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -17,21 +16,7 @@ void main() {
     usecase = GetPodcastFeedUseCase(mockRepository);
   });
 
-  List<Episode> episodes = List(2);
-  episodes[0] = Episode(
-    title: "Episode 1",
-    description: "Descriptions of Episode 1",
-  );
-  episodes[1] = Episode(
-    title: "Episode 2",
-    description: "Descriptions of Episode 2",
-  );
-
-  final podcastFeed = PodcastFeed(
-    title: "Podcast Title",
-    description: "Podcast Description",
-    episodes: episodes,
-  );
+  final podcastFeed = PodcastFeed();
   final podcastUrl = "podcast.url";
 
   test(

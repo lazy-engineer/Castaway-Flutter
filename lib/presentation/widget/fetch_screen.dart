@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../podcast_bloc.dart';
-import '../podcast_event.dart';
+import '../bloc/podcast/podcast_bloc.dart';
+import '../bloc/podcast/podcast_event.dart';
 
 class FetchScreen extends StatelessWidget {
   const FetchScreen({

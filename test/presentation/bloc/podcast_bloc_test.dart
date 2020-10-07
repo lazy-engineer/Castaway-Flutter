@@ -1,10 +1,10 @@
 import 'package:castaway/core/failure.dart';
 import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/entity/podcast_feed.dart';
-import 'package:castaway/domain/get_podcast_feed_usecase.dart';
-import 'package:castaway/presentation/podcast_bloc.dart';
-import 'package:castaway/presentation/podcast_event.dart';
-import 'package:castaway/presentation/podcast_state.dart';
+import 'package:castaway/domain/usecase/get_podcast_feed_usecase.dart';
+import 'package:castaway/presentation/bloc/podcast/podcast_bloc.dart';
+import 'package:castaway/presentation/bloc/podcast/podcast_event.dart';
+import 'package:castaway/presentation/bloc/podcast/podcast_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/domain/entity/podcast_feed.dart';
+import 'package:castaway/presentation/widget/episode_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:just_audio/just_audio.dart';
@@ -38,10 +38,9 @@ class PodcastFeedScreen extends StatelessWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (_, index) => _buildEpisodeRow(
-                  context,
-                  podcastFeed.episodes[index],
-                  player,
+                (_, index) => EpisodeTile(
+                  episode: podcastFeed.episodes[index],
+                  player: player,
                 ),
                 childCount: podcastFeed.episodes.length,
               ),
@@ -50,76 +49,6 @@ class PodcastFeedScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _buildEpisodeRow(
-      BuildContext context, Episode episode, AudioPlayer player) {
-    return Container(
-      child: ListTile(
-        contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-        leading: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              children: <Widget>[
-                Text(
-                  '25',
-                  style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                Text(
-                  'Jan',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w300,
-                      fontSize: 11),
-                ),
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15.0, 14.0, 0.0, 14.0),
-              width: 2.0,
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Theme.of(context).accentColor,
-                  borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(40.0),
-                    topRight: const Radius.circular(40.0),
-                    bottomLeft: const Radius.circular(40.0),
-                    bottomRight: const Radius.circular(40.0),
-                  )),
-            )
-          ],
-        ),
-        title: Text(
-          episode.title,
-          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
-        ),
-        subtitle: Text("Subtitle",
-            style: TextStyle(color: Theme.of(context).accentColor)),
-        dense: false,
-        trailing: IconButton(
-          icon: Icon(Icons.play_circle_outline_rounded),
-          onPressed: () {
-            try {
-              _play(player, episode.audioUrl);
-            } catch (e) {
-              print("Error: $e");
-            }
-          },
-        ),
-      ),
-      decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.black26))),
-    );
-  }
-
-  Future<void> _play(AudioPlayer player, String url) async {
-    await player.setUrl(url);
-    player.playing ? await player.pause() : await player.play();
   }
 }
 

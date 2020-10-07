@@ -50,7 +50,10 @@ void main() {
     );
 
     final episodes = feed.items
-        .map((e) => Episode(title: e.title, description: e.description))
+        .map((e) => Episode(
+            title: e.title,
+            description: e.description,
+            audioUrl: e.enclosure.url))
         .toList();
 
     final podcastFeed = PodcastFeed(

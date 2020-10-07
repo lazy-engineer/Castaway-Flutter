@@ -1,7 +1,7 @@
 import 'package:castaway/data/podcast_local_data_source.dart';
 import 'package:castaway/data/podcast_remote_data_source.dart';
-import 'package:castaway/domain/get_podcast_feed_usecase.dart';
 import 'package:castaway/domain/podcast_repository.dart';
+import 'package:castaway/domain/usecase/get_podcast_feed_usecase.dart';
 import 'package:castaway/presentation/widget/episodes_screen.dart';
 import 'package:castaway/presentation/widget/error_screen.dart';
 import 'package:castaway/presentation/widget/fetch_screen.dart';
@@ -11,8 +11,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-import '../podcast_bloc.dart';
-import '../podcast_state.dart';
+import '../bloc/podcast/podcast_bloc.dart';
+import '../bloc/podcast/podcast_state.dart';
 
 class PodcastFeedPage extends StatelessWidget {
   @override

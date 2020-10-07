@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-import 'entity/podcast_feed.dart';
+import '../entity/podcast_feed.dart';
 
 class GetPodcastFeedUseCase implements UseCase<PodcastFeed, Params> {
   final PodcastRepository repository;
