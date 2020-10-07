@@ -1,0 +1,19 @@
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+
+@immutable
+abstract class EpisodeTileEvent extends Equatable {
+  @override
+  List<Object> get props => [];
+}
+
+class PlayEvent extends EpisodeTileEvent {
+  final String url;
+
+  PlayEvent(this.url);
+
+  @override
+  List<Object> get props => [url];
+}
+
+class PauseEvent extends EpisodeTileEvent {}
