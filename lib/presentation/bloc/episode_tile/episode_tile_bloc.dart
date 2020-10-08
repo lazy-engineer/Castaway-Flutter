@@ -26,12 +26,11 @@ class EpisodeTileBloc extends Bloc<EpisodeTileEvent, EpisodeTileState> {
     EpisodeTileEvent event,
   ) async* {
     if (event is PlayEvent) {
-      yield Loading();
+      yield Buffering();
       final failureOrPlaying = await playAudio.execute(Params(url: event.url));
       yield* _eitherPlayingOrErrorState(failureOrPlaying);
     }
     if (event is PauseEvent) {
-      yield Loading();
       final failureOrPaused = await pauseAudio.execute(NoParams());
       yield* _eitherPausedOrErrorState(failureOrPaused);
     }

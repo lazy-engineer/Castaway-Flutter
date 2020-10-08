@@ -9,7 +9,7 @@ abstract class EpisodeTileState extends Equatable {
 
 class Empty extends EpisodeTileState {}
 
-class Loading extends EpisodeTileState {}
+class Buffering extends EpisodeTileState {}
 
 class Loaded extends EpisodeTileState {}
 
