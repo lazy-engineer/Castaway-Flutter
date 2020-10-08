@@ -14,7 +14,12 @@ import 'package:http/http.dart' as http;
 import '../bloc/podcast/podcast_bloc.dart';
 import '../bloc/podcast/podcast_state.dart';
 
-class PodcastFeedPage extends StatelessWidget {
+class PodcastFeedPage extends StatefulWidget {
+  @override
+  _PodcastFeedPage createState() => _PodcastFeedPage();
+}
+
+class _PodcastFeedPage extends State<PodcastFeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 
-class EpisodeTile extends StatelessWidget {
+class EpisodeTile extends StatefulWidget {
   final Episode episode;
   final AudioPlayer player;
 
@@ -19,9 +19,25 @@ class EpisodeTile extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _EpisodeTile createState() => _EpisodeTile();
+}
+
+class _EpisodeTile extends State<EpisodeTile>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 500), vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
-      child: _buildEpisodeTile(context, player),
+      child: _buildEpisodeTile(context, widget.player),
     );
   }
 
@@ -40,17 +56,17 @@ class EpisodeTile extends StatelessWidget {
         builder: (context, state) {
           switch (state.runtimeType) {
             case Empty:
-              return _buildEpisodeRow(context, episode);
-            case Loading:
-              return _buildEpisodeRow(context, episode);
+              return _buildEpisodeRow(context, widget.episode);
+            case Buffering:
+              return _buildEpisodeRow(context, widget.episode);
             case Loaded:
-              return _buildEpisodeRow(context, episode);
+              return _buildEpisodeRow(context, widget.episode);
             case Playing:
-              return _buildEpisodeRow(context, episode);
+              return _buildEpisodeRow(context, widget.episode);
             case Paused:
-              return _buildEpisodeRow(context, episode);
+              return _buildEpisodeRow(context, widget.episode);
             case Error:
-              return _buildEpisodeRow(context, episode);
+              return _buildEpisodeRow(context, widget.episode);
           }
         },
       ),
@@ -106,7 +122,10 @@ class EpisodeTile extends StatelessWidget {
             style: TextStyle(color: Theme.of(context).accentColor)),
         dense: false,
         trailing: IconButton(
-          icon: Icon(Icons.play_circle_outline_rounded),
+          icon: AnimatedIcon(
+            icon: AnimatedIcons.play_pause,
+            progress: controller,
+          ),
           onPressed: () {
             _firePlayAudioEvent(context, episode.audioUrl);
           },
@@ -118,10 +137,19 @@ class EpisodeTile extends StatelessWidget {
   }
 
   void _firePlayAudioEvent(BuildContext context, String url) {
+    controller.forward();
     return BlocProvider.of<EpisodeTileBloc>(context).add(PlayEvent(url));
   }
 
   void _firePauseAudioEvent(BuildContext context) {
+    controller.reverse();
     return BlocProvider.of<EpisodeTileBloc>(context).add(PauseEvent());
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
   }
 }
