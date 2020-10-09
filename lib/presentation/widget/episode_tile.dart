@@ -1,21 +1,18 @@
 import 'package:castaway/domain/entity/episode.dart';
-import 'package:castaway/domain/usecase/pause_audio_usecase.dart';
-import 'package:castaway/domain/usecase/play_audio_usecase.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_bloc.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_event.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_audio/just_audio.dart';
 
 class EpisodeTile extends StatefulWidget {
   final Episode episode;
-  final AudioPlayer player;
+  final EpisodeTileBloc bloc;
 
   const EpisodeTile({
     Key key,
     @required this.episode,
-    @required this.player,
+    @required this.bloc,
   }) : super(key: key);
 
   @override
@@ -37,22 +34,14 @@ class _EpisodeTile extends State<EpisodeTile>
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _buildEpisodeTile(context, widget.player),
+      child: _buildEpisodeTile(context),
     );
   }
 
-  BlocProvider<EpisodeTileBloc> _buildEpisodeTile(
-      BuildContext context, AudioPlayer player) {
-    final _playAudio = PlayAudioUseCase(player);
-    final _pauseAudio = PauseAudioUseCase(player);
-
+  BlocProvider<EpisodeTileBloc> _buildEpisodeTile(BuildContext context) {
     return BlocProvider(
-      create: (_) => EpisodeTileBloc(
-        playAudio: _playAudio,
-        pauseAudio: _pauseAudio,
-      ),
+      create: (_) => widget.bloc,
       child: BlocBuilder<EpisodeTileBloc, EpisodeTileState>(
-        // ignore: missing_return
         builder: (context, state) {
           switch (state.runtimeType) {
             case Empty:
@@ -66,6 +55,8 @@ class _EpisodeTile extends State<EpisodeTile>
             case Paused:
               return _buildEpisodeRow(context, widget.episode);
             case Error:
+              return _buildEpisodeRow(context, widget.episode);
+            default:
               return _buildEpisodeRow(context, widget.episode);
           }
         },
