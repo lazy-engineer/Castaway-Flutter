@@ -1,7 +1,11 @@
+import 'package:castaway/core/failure.dart';
+import 'package:castaway/core/usecase.dart';
 import 'package:castaway/domain/usecase/pause_audio_usecase.dart';
 import 'package:castaway/domain/usecase/play_audio_usecase.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_bloc.dart';
+import 'package:castaway/presentation/bloc/episode_tile/episode_tile_event.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_state.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -27,5 +31,43 @@ void main() {
     test('initial state should be Empty', () {
       expect(bloc.state, equals(Empty()));
     });
+
+    test(
+      'should emit [Buffering, Playing] when audio play feed starts playing',
+      () async {
+        // given
+        when(mockGetPlayAudioUseCase.execute(any))
+            .thenAnswer((_) async => Right(NoParams));
+
+        // when
+        bloc.add(PlayEvent("podcast.url"));
+
+        // then
+        final expected = [
+          Buffering(),
+          Playing(),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+      },
+    );
+
+    test(
+      'should emit [Buffering, Error] with a proper message for the error when audio play fail to play',
+      () async {
+        // given
+        when(mockGetPlayAudioUseCase.execute(any))
+            .thenAnswer((_) async => Left(AudioPlayerFailure()));
+
+        // when
+        bloc.add(PlayEvent("podcast.url"));
+
+        // then
+        final expected = [
+          Buffering(),
+          Error(message: 'Unexpected error'),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+      },
+    );
   });
 }
