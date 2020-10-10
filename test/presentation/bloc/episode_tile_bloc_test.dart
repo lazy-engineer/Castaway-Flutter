@@ -27,13 +27,13 @@ void main() {
     );
   });
 
-  group('PlayAudioUseCase', () {
+  group('EpisodeTileBloc', () {
     test('initial state should be Empty', () {
       expect(bloc.state, equals(Empty()));
     });
 
     test(
-      'should emit [Buffering, Playing] when audio play feed starts playing',
+      'should emit [Buffering, Playing] when audio player starts playing',
       () async {
         // given
         when(mockGetPlayAudioUseCase.execute(any))
@@ -52,7 +52,7 @@ void main() {
     );
 
     test(
-      'should emit [Buffering, Error] with a proper message for the error when audio play fail to play',
+      'should emit [Buffering, Error] with a proper message for the error when audio player fail to play',
       () async {
         // given
         when(mockGetPlayAudioUseCase.execute(any))
@@ -67,6 +67,40 @@ void main() {
           Error(message: 'Unexpected error'),
         ];
         expectLater(bloc, emitsInOrder(expected));
+      },
+    );
+
+    test(
+      'should emit [Paused] when audio player pauses',
+      () async {
+        // given
+        when(mockGetPauseAudioUseCase.execute(any))
+            .thenAnswer((_) async => Right(NoParams));
+
+        // when
+        bloc.add(PauseEvent());
+
+        // then
+        final expected = Paused();
+
+        expectLater(bloc, emits(expected));
+      },
+    );
+
+    test(
+      'should emit [Error] with a proper message for the error when audio player fail to pause',
+      () async {
+        // given
+        when(mockGetPauseAudioUseCase.execute(any))
+            .thenAnswer((_) async => Left(AudioPlayerFailure()));
+
+        // when
+        bloc.add(PauseEvent());
+
+        // then
+        final expected = Error(message: 'Unexpected error');
+
+        expectLater(bloc, emits(expected));
       },
     );
   });
