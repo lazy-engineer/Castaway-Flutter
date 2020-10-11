@@ -40,7 +40,6 @@ class _PodcastFeedPage extends State<PodcastFeedPage> {
       create: (_) => PodcastBloc(getPodcastFeed: _getPodcastFeed),
       child: Center(
         child: BlocBuilder<PodcastBloc, PodcastState>(
-          // ignore: missing_return
           builder: (context, state) {
             if (state is Empty) {
               return FetchScreen();
@@ -50,6 +49,8 @@ class _PodcastFeedPage extends State<PodcastFeedPage> {
               return PodcastFeedScreen(podcastFeed: state.podcastFeed);
             } else if (state is Error) {
               return ErrorScreen(message: state.message);
+            } else {
+              return FetchScreen();
             }
           },
         ),
