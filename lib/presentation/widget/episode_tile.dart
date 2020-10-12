@@ -1,6 +1,5 @@
 import 'package:castaway/domain/entity/episode.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_bloc.dart';
-import 'package:castaway/presentation/bloc/episode_tile/episode_tile_event.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,11 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class EpisodeTile extends StatefulWidget {
   final Episode episode;
   final EpisodeTileBloc bloc;
+  final VoidCallback onPlayPressed;
+  final VoidCallback onPausePressed;
 
   const EpisodeTile({
     Key key,
     @required this.episode,
     @required this.bloc,
+    @required this.onPlayPressed,
+    @required this.onPausePressed,
   }) : super(key: key);
 
   @override
@@ -29,6 +32,7 @@ class _EpisodeTile extends State<EpisodeTile>
 
     controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
+    controller.animateTo(0);
   }
 
   @override
@@ -45,26 +49,24 @@ class _EpisodeTile extends State<EpisodeTile>
         builder: (context, state) {
           switch (state.runtimeType) {
             case Empty:
-              return _buildEpisodeRow(context, widget.episode);
+              return _buildEpisodeRow(context);
             case Buffering:
-              return _buildEpisodeRow(context, widget.episode);
-            case Loaded:
-              return _buildEpisodeRow(context, widget.episode);
+              return _buildEpisodeRow(context);
             case Playing:
-              return _buildEpisodeRow(context, widget.episode);
+              return _buildEpisodeRow(context);
             case Paused:
-              return _buildEpisodeRow(context, widget.episode);
+              return _buildEpisodeRow(context);
             case Error:
-              return _buildEpisodeRow(context, widget.episode);
+              return _buildEpisodeRow(context);
             default:
-              return _buildEpisodeRow(context, widget.episode);
+              return _buildEpisodeRow(context);
           }
         },
       ),
     );
   }
 
-  Widget _buildEpisodeRow(BuildContext context, Episode episode) {
+  Widget _buildEpisodeRow(BuildContext context) {
     return Container(
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -106,7 +108,7 @@ class _EpisodeTile extends State<EpisodeTile>
           ],
         ),
         title: Text(
-          episode.title,
+          widget.episode.title,
           style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500),
         ),
         subtitle: Text("Subtitle",
@@ -118,23 +120,19 @@ class _EpisodeTile extends State<EpisodeTile>
             progress: controller,
           ),
           onPressed: () {
-            _firePlayAudioEvent(context, episode.audioUrl);
+            if (widget.bloc.state is Playing) {
+              controller.reverse();
+              widget.onPausePressed();
+            } else {
+              controller.forward();
+              widget.onPlayPressed();
+            }
           },
         ),
       ),
       decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: Colors.black26))),
     );
-  }
-
-  void _firePlayAudioEvent(BuildContext context, String url) {
-    controller.forward();
-    return BlocProvider.of<EpisodeTileBloc>(context).add(PlayEvent(url));
-  }
-
-  void _firePauseAudioEvent(BuildContext context) {
-    controller.reverse();
-    return BlocProvider.of<EpisodeTileBloc>(context).add(PauseEvent());
   }
 
   @override

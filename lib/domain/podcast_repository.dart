@@ -27,9 +27,10 @@ class PodcastRepositoryImpl implements PodcastRepository {
 
       final episodes = remote.items
           .map((e) => Episode(
-              title: e.title,
-              description: e.description,
-              audioUrl: e.enclosure.url))
+                title: e.title,
+                description: e.description,
+                audioUrl: e.enclosure.url,
+              ))
           .toList();
 
       final podcastFeed = PodcastFeed(

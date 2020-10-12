@@ -4,6 +4,7 @@ import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:castaway/domain/usecase/pause_audio_usecase.dart';
 import 'package:castaway/domain/usecase/play_audio_usecase.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_bloc.dart';
+import 'package:castaway/presentation/bloc/episode_tile/episode_tile_event.dart';
 import 'package:castaway/presentation/widget/episode_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -26,6 +27,8 @@ class PodcastFeedScreen extends StatelessWidget {
     final _player = AudioPlayer();
     final _playAudio = PlayAudioUseCase(_player);
     final _pauseAudio = PauseAudioUseCase(_player);
+    final _bloc =
+        EpisodeTileBloc(playAudio: _playAudio, pauseAudio: _pauseAudio);
 
     return Container(
       color: Theme.of(context).highlightColor,
@@ -45,10 +48,13 @@ class PodcastFeedScreen extends StatelessWidget {
               delegate: SliverChildBuilderDelegate(
                 (_, index) => EpisodeTile(
                   episode: podcastFeed.episodes[index],
-                  bloc: EpisodeTileBloc(
-                    playAudio: _playAudio,
-                    pauseAudio: _pauseAudio,
-                  ),
+                  bloc: _bloc,
+                  onPausePressed: () {
+                    _bloc.add(PauseEvent());
+                  },
+                  onPlayPressed: () {
+                    _bloc.add(PlayEvent(podcastFeed.episodes[index].audioUrl));
+                  },
                 ),
                 childCount: podcastFeed.episodes.length,
               ),

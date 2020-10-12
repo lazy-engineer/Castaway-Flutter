@@ -14,7 +14,7 @@ class PlayAudioUseCase implements UseCase<void, Params> {
   Future<Either<Failure, void>> execute(Params params) async {
     try {
       await player.setUrl(params.url);
-      return Right(await player.play());
+      return Right(player.play());
     } catch (e) {
       return Left(AudioPlayerFailure());
     }

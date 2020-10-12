@@ -11,8 +11,6 @@ class Empty extends EpisodeTileState {}
 
 class Buffering extends EpisodeTileState {}
 
-class Loaded extends EpisodeTileState {}
-
 class Playing extends EpisodeTileState {}
 
 class Paused extends EpisodeTileState {}
