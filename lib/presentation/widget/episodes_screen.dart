@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:castaway/domain/audio_repository.dart';
 import 'package:castaway/domain/entity/podcast_feed.dart';
 import 'package:castaway/domain/usecase/pause_audio_usecase.dart';
 import 'package:castaway/domain/usecase/play_audio_usecase.dart';
@@ -25,8 +26,9 @@ class PodcastFeedScreen extends StatelessWidget {
 
   Widget _buildSliverEpisodes(BuildContext context) {
     final _player = AudioPlayer();
-    final _playAudio = PlayAudioUseCase(_player);
-    final _pauseAudio = PauseAudioUseCase(_player);
+    final _audioRepo = AudioRepositoryImpl(player: _player);
+    final _playAudio = PlayAudioUseCase(_audioRepo);
+    final _pauseAudio = PauseAudioUseCase(_audioRepo);
     final _bloc =
         EpisodeTileBloc(playAudio: _playAudio, pauseAudio: _pauseAudio);
 

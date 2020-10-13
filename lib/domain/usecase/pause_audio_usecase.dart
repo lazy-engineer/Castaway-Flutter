@@ -1,19 +1,15 @@
 import 'package:castaway/core/failure.dart';
 import 'package:castaway/core/usecase.dart';
+import 'package:castaway/domain/audio_repository.dart';
 import 'package:dartz/dartz.dart';
-import 'package:just_audio/just_audio.dart';
 
 class PauseAudioUseCase implements UseCase<void, NoParams> {
-  final AudioPlayer player;
+  final AudioRepository repository;
 
-  PauseAudioUseCase(this.player);
+  PauseAudioUseCase(this.repository);
 
   @override
   Future<Either<Failure, void>> execute(NoParams params) async {
-    try {
-      return Right(await player.pause());
-    } catch (e) {
-      return Left(AudioPlayerFailure());
-    }
+    return await repository.pauseAudio();
   }
 }
