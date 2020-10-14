@@ -32,7 +32,6 @@ class _EpisodeTile extends State<EpisodeTile>
 
     controller = AnimationController(
         duration: const Duration(milliseconds: 500), vsync: this);
-    controller.animateTo(0);
   }
 
   @override
@@ -47,26 +46,26 @@ class _EpisodeTile extends State<EpisodeTile>
       create: (_) => widget.bloc,
       child: BlocBuilder<EpisodeTileBloc, EpisodeTileState>(
         builder: (context, state) {
-          switch (state.runtimeType) {
-            case Empty:
-              return _buildEpisodeRow(context);
-            case Buffering:
-              return _buildEpisodeRow(context);
-            case Playing:
-              return _buildEpisodeRow(context);
-            case Paused:
-              return _buildEpisodeRow(context);
-            case Error:
-              return _buildEpisodeRow(context);
-            default:
-              return _buildEpisodeRow(context);
+          if (state is Empty) {
+            return _buildEpisodeRow();
+          } else if (state is Buffering) {
+            return _buildEpisodeRow();
+          } else if (state is Playing) {
+            return _buildEpisodeRow();
+          } else if (state is Paused) {
+            controller.animateTo(0.0);
+            return _buildEpisodeRow();
+          } else if (state is Error) {
+            return _buildEpisodeRow();
+          } else {
+            return _buildEpisodeRow();
           }
         },
       ),
     );
   }
 
-  Widget _buildEpisodeRow(BuildContext context) {
+  Widget _buildEpisodeRow() {
     return Container(
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
@@ -138,7 +137,6 @@ class _EpisodeTile extends State<EpisodeTile>
   @override
   void dispose() {
     controller.dispose();
-
     super.dispose();
   }
 }
