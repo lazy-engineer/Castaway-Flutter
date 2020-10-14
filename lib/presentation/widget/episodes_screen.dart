@@ -55,7 +55,10 @@ class PodcastFeedScreen extends StatelessWidget {
                     _bloc.add(PauseEvent());
                   },
                   onPlayPressed: () {
-                    _bloc.add(PlayEvent(podcastFeed.episodes[index].audioUrl));
+                    _bloc.add(PlayEvent(
+                      url: podcastFeed.episodes[index].audioUrl,
+                      episodeId: podcastFeed.episodes[index].id.toString(),
+                    ));
                   },
                 ),
                 childCount: podcastFeed.episodes.length,

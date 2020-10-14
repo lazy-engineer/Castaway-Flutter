@@ -27,7 +27,10 @@ class EpisodeTileBloc extends Bloc<EpisodeTileEvent, EpisodeTileState> {
   ) async* {
     if (event is PlayEvent) {
       yield Buffering();
-      final failureOrPlaying = await playAudio.execute(Params(url: event.url));
+      final failureOrPlaying = await playAudio.execute(Params(
+        url: event.url,
+        episodeId: event.episodeId,
+      ));
       yield* _eitherPlayingOrErrorState(failureOrPlaying);
     }
     if (event is PauseEvent) {
@@ -46,11 +49,11 @@ class EpisodeTileBloc extends Bloc<EpisodeTileEvent, EpisodeTileState> {
   }
 
   Stream<EpisodeTileState> _eitherPausedOrErrorState(
-    Either<Failure, void> failureOrPaused,
+    Either<Failure, String> failureOrPaused,
   ) async* {
     yield failureOrPaused.fold(
       (failure) => Error(message: _mapFailureToMessage(failure)),
-      (success) => Paused(),
+      (episodeId) => Paused(episodeId: episodeId),
     );
   }
 

@@ -9,11 +9,15 @@ abstract class EpisodeTileEvent extends Equatable {
 
 class PlayEvent extends EpisodeTileEvent {
   final String url;
+  final String episodeId;
 
-  PlayEvent(this.url);
+  PlayEvent({
+    @required this.url,
+    @required this.episodeId,
+  });
 
   @override
-  List<Object> get props => [url];
+  List<Object> get props => [url, episodeId];
 }
 
 class PauseEvent extends EpisodeTileEvent {}

@@ -11,16 +11,20 @@ class PlayAudioUseCase implements UseCase<void, Params> {
   PlayAudioUseCase(this.repository);
 
   @override
-  Future<Either<Failure, void>> execute(Params params) async {
-    return await repository.playAudio(params.url);
+  Future<Either<Failure, String>> execute(Params params) async {
+    return await repository.playAudio(params.url, params.episodeId);
   }
 }
 
 class Params extends Equatable {
   final String url;
+  final String episodeId;
 
-  Params({@required this.url});
+  Params({
+    @required this.url,
+    @required this.episodeId,
+  });
 
   @override
-  List<Object> get props => [url];
+  List<Object> get props => [url, episodeId];
 }

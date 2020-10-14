@@ -13,7 +13,14 @@ class Buffering extends EpisodeTileState {}
 
 class Playing extends EpisodeTileState {}
 
-class Paused extends EpisodeTileState {}
+class Paused extends EpisodeTileState {
+  final String episodeId;
+
+  Paused({@required this.episodeId});
+
+  @override
+  List<Object> get props => [episodeId];
+}
 
 class Error extends EpisodeTileState {
   final String message;

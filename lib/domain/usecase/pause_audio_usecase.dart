@@ -9,7 +9,7 @@ class PauseAudioUseCase implements UseCase<void, NoParams> {
   PauseAudioUseCase(this.repository);
 
   @override
-  Future<Either<Failure, void>> execute(NoParams params) async {
+  Future<Either<Failure, String>> execute(NoParams params) async {
     return await repository.pauseAudio();
   }
 }
