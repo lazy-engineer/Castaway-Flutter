@@ -1,5 +1,4 @@
 import 'package:castaway/core/failure.dart';
-import 'package:castaway/core/usecase.dart';
 import 'package:castaway/domain/usecase/pause_audio_usecase.dart';
 import 'package:castaway/domain/usecase/play_audio_usecase.dart';
 import 'package:castaway/presentation/bloc/episode_tile/episode_tile_bloc.dart';
@@ -37,10 +36,10 @@ void main() {
       () async {
         // given
         when(mockGetPlayAudioUseCase.execute(any))
-            .thenAnswer((_) async => Right(NoParams));
+            .thenAnswer((_) async => Right("1"));
 
         // when
-        bloc.add(PlayEvent("podcast.url"));
+        bloc.add(PlayEvent(url: "podcast.url", episodeId: "1"));
 
         // then
         final expected = [
@@ -59,7 +58,7 @@ void main() {
             .thenAnswer((_) async => Left(AudioPlayerFailure()));
 
         // when
-        bloc.add(PlayEvent("podcast.url"));
+        bloc.add(PlayEvent(url: "podcast.url", episodeId: "1"));
 
         // then
         final expected = [
@@ -75,13 +74,13 @@ void main() {
       () async {
         // given
         when(mockGetPauseAudioUseCase.execute(any))
-            .thenAnswer((_) async => Right(NoParams));
+            .thenAnswer((_) async => Right("1"));
 
         // when
         bloc.add(PauseEvent());
 
         // then
-        final expected = Paused();
+        final expected = Paused(episodeId: "1");
 
         expectLater(bloc, emits(expected));
       },
